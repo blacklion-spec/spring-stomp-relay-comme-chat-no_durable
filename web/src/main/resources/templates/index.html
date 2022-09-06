@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>littleass</title>
+    <link rel="stylesheet" href="css/main.css"/>
+</head>
+<body>
+<noscript>
+    <h2>Sorry! Your browser doesn't support Javascript</h2>
+</noscript>
+<div id="username-page">
+    <div class="username-page-container">
+        <h1 class="title">登录</h1>
+        <form id="usernameForm" name="usernameForm" action="/login" method="post">
+            <div class="form-group">
+                <input type="text" id="name" name="userMail" placeholder="邮箱" autocomplete="off" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="password" id="pwName" name="password" placeholder="密码" autocomplete="off" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="accent username-submit">进入消息接收室</button>
+            </div>
+            <div class="form-group">
+                <a class="accent username-submit" href="/register/index">注册</a>
+            </div>
+        </form>
+    </div>
+</div>
+<!--这里的访问路径为 /-->
+<!--相对路径是相对与当前url路径-->
+<!--绝对路径就是从当前的host主机根目录开始查找，例如：当前的html路径是/chat/add,如果js引入路径为../static/js/main.js,那么浏览器就会生成路径 host:port/chat/static/js/main.js-->
+<!--本质就是服务器返回这个js文件，在static路径下的文件可以直接通过路径查找，会直接在static下查找，省略了自己写controller-->
+<!--<script src="/js/sockjs.min.js"></script> &lt;!&ndash;这样写是绝对路径，就是说在服务器上下文中去查找 host:port/js/sockjs.min.js,返回此文件&ndash;&gt;-->
+<!--<script src="/js/stomp.min.js"></script>-->
+<!--<script src="/js/main.js"></script> &lt;!&ndash;这样写就是在静态资源路径下去查找&ndash;&gt;-->
+<!--<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<script>
+    let registerButton = $("#registerButton");
+    registerButton.click(function () {
+        $.ajax({
+            type: "get",
+            url: "/register",
+            dataType: "html",
+            success: function (result) {
+                $(document.body).html(result);
+            }
+        });
+    });
+</script>-->
+</body>
+</html>

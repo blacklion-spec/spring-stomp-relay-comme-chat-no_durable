@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stomp.custom.mapper.UserMapper">
+
+    <sql id="baseSelect">
+        USER_ID,USER_NAME,USER_MAIL,PASSWORD,CREATE_TIME,IS_BAN
+    </sql>
+
+    <resultMap id="all_filed_mapping" type="com.stomp.custom.entity.User">
+        <id property="userId" column="USER_ID" jdbcType="BIGINT" javaType="long"/>
+        <result property="userName" column="USER_NAME" javaType="string" jdbcType="VARCHAR"/>
+        <result property="userMail" column="USER_MAIL" jdbcType="VARCHAR" javaType="string"/>
+        <result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
+        <result property="createTime" column="CREATE_TIME" jdbcType="TIMESTAMP"/>
+        <result property="isBan" column="IS_BAN" jdbcType="BIT"/>
+    </resultMap>
+
+    <insert id="insert">
+        insert into user(USER_MAIL,USER_NAME,PASSWORD,CREATE_TIME) values (#{user.userMail},#{user.userName},#{user.password},#{user.createTime})
+    </insert>
+
+    <select id="getByUsername" resultMap="all_filed_mapping">
+        select * from user where USER_NAME = #{username} and IS_BAN = 0
+    </select>
+
+    <select id="getByMail" resultMap="all_filed_mapping">
+        select * from user where USER_MAIL = #{mail} and IS_BAN = 0
+    </select>
+
+    <select id="getByUserId" resultType="com.stomp.custom.entity.User">
+        select
+        <include refid="baseSelect"></include>
+        from user where USER_ID = #{userId} and IS_BAN = 0
+    </select>
+
+</mapper>

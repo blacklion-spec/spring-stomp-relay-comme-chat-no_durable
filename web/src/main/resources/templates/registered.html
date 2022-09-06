@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="/css/registered.css"/>
+</head>
+<body>
+<div id="register-page">
+    <div class="register-page-container">
+        <h1 class="title">注册</h1>
+        <form id="registerForm" name="registerForm" action="/register" method="post">
+            <div class="form-group">
+                <input type="text" id="userMail" name="userMail" placeholder="邮箱" autocomplete="off"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <button id="sendVerificationCode" type="button" class="accent">发送验证码</button>
+            </div>
+            <div class="form-group">
+                <input type="text" id="verificationCode" name="verificationCode" placeholder="验证码" autocomplete="off"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="用户名" autocomplete="off"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="password" id="pwName" name="password" placeholder="密码" autocomplete="off"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <input type="password" id="confirm" name="confirm" placeholder="确认密码" autocomplete="off"
+                       class="form-control"/>
+            </div>
+            <div class="form-group">
+                <button id="register-button" type="submit" class="accent register-submit">提交</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<script>
+    //发送邮箱验证码按钮
+    let sendVerificationCodeButton = $("#sendVerificationCode");
+    //绑定点击事件
+    sendVerificationCodeButton.click(function () {
+        let userMail = $("#userMail");
+        let userMailValue = userMail.val();
+        if (userMailValue === '' || userMailValue.length === 0) {
+            alert("邮箱为空！");
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/mail/sendVerificationCode",
+            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify({mail: userMailValue}),
+            success: function (data) {
+                alert(data.msg);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                //responseJSON
+                alert(XMLHttpRequest.responseJSON.msg);
+            }
+        });
+    });
+</script>
+</html>
